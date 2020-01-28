@@ -3,20 +3,18 @@ package com.hachicore.springwebservicebook.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hachicore.springwebservicebook.domain.posts.Posts;
 import com.hachicore.springwebservicebook.domain.posts.PostsRepository;
+import com.hachicore.springwebservicebook.web.common.BaseControllerTest;
 import com.hachicore.springwebservicebook.web.dto.PostsRequestDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,10 +26,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
 @Slf4j
-class PostsApiControllerTest {
+class PostsApiControllerTest extends BaseControllerTest {
 
     @LocalServerPort
     private Integer port;
@@ -41,9 +37,6 @@ class PostsApiControllerTest {
 
     @Autowired
     private PostsRepository postsRepository;
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;

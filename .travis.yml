@@ -19,3 +19,19 @@ notifications:
   email:
     recipients:
       - nkw8620@gmail.com
+
+before_deploy:
+  - zip -r spring-webservice-book *
+  - mkdir -p deploy
+  - mv spring-webservice-book.zip deploy/spring-webservice-book.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: spring-book-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
